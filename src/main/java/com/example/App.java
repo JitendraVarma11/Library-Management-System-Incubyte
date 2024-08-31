@@ -1,8 +1,6 @@
 package com.example;
 
 import java.util.Scanner;
-import com.example.Library;
-import com.example.Book;
 
 public class App {
 
@@ -83,7 +81,7 @@ public class App {
                 borrowBookOption();
                 break;
             case 3:
-                // returnBookOption();
+                returnBookOption();
                 break;
             case 4:
                 // viewAvailableBooksOption();
@@ -96,7 +94,7 @@ public class App {
         }
     }
 
-    //Add book
+    //Add a book
     private static void addBookOption() {
         System.out.println("\n******* Add a New Book *******");
         try {
@@ -123,6 +121,7 @@ public class App {
         }
     }
 
+    //Borrow a book
     private static void borrowBookOption() {
         System.out.println("\n******* Borrow a Book *******");
         try {
@@ -132,6 +131,19 @@ public class App {
             System.out.println("Book borrowed successfully!");
         } catch (Exception e) {
             System.err.println("Error borrowing book: " + e.getMessage());
+        }
+    }
+
+    //Return a book
+    private static void returnBookOption() {
+        System.out.println("\n--- Return a Book ---");
+        try {
+            System.out.print("Enter ISBN of the book to return: ");
+            String isbn = scanner.nextLine().trim();
+            library.returnBook(isbn);
+            System.out.println("Book returned successfully!");
+        } catch (Exception e) {
+            System.err.println("Error returning book: " + e.getMessage());
         }
     }
 }

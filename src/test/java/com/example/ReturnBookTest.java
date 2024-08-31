@@ -4,65 +4,65 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BorrowBookTest {
+public class ReturnBookTest {
     private Library library;
-    
+
     @Before
     public void setUp() {
         library = new Library();
     }
 
     @Test
-    public void testBorrowBookSuccessfully() {
+    public void testReturnBookSuccessfully() {
         Book book = new Book("1234567999", "Test Book", "Author", 2023);
         library.addBook(book);
-    
-        library.borrowBook("1234567999");
-    
-        assertFalse("The book should be marked as borrowed.", book.isAvailable());
+
+        library.borrowBook("1234567890");
+
+        library.returnBook("1234567890");
+
+        assertTrue("The book should be marked as available.", book.isAvailable());
     }
-    
+
     @Test
-    public void testBorrowAlreadyBorrowedBook() {
-        Book book = new Book("1234567999", "Test Book", "Author", 2023);
+    public void testReturnBookAlreadyAvailable() {
+        library.addBook(new Book("1234567890", "Effective Java", "Joshua Bloch", 2018));
 
-        library.addBook(book);
-        library.borrowBook("1234567999");
-
+        
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            library.borrowBook("1234567999");
+            library.returnBook("1234567890");
         });
-        assertEquals("Book is already borrowed.", exception.getMessage());
+        assertEquals("Book is already available.", exception.getMessage());
     }
-    
+
     @Test
-    public void testBorrowNonExistentBook() {
+    public void testReturnNonExistentBook() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            library.borrowBook("0000000000");
+            library.returnBook("0000000000");
         });
         assertEquals("Book not found.", exception.getMessage());
     }
-    
+
     @Test
-    public void testBorrowBookWithNullISBN() {
+    public void testReturnBookWithNullISBN() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            library.borrowBook(null);
+            library.returnBook(null);
         });
         assertEquals("ISBN cannot be null.", exception.getMessage());
     }
-    
     @Test
-    public void testBorrowBookWithEmptyISBN() {
+    public void testReturnBookWithEmptyISBN() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            library.borrowBook("");
+            library.returnBook("");
         });
         assertEquals("ISBN cannot be empty.", exception.getMessage());
     }
-    
+
     @Test
-    public void testBorrowBookWithInvalidISBNFormat() {
+    public void testReturnBookWithInvalidISBNFormat() {
+        
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            library.borrowBook("12345X7090");
+            library.returnBook("12345X7890");
         });
         assertEquals("Invalid ISBN: ISBN must be 10 or 13 numeric characters long.", exception.getMessage());
     }

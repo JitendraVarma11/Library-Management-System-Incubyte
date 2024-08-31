@@ -49,7 +49,7 @@ public class Library {
         }
         // check is ISBN valid
         isbn = isbn.trim().replaceAll("\\s+", "");
-        if (!isbn.matches("\\d+") || (isbn.length() != 10 && isbn.length() != 13)) {
+        if (!isbn.matches("\\d+") || (isbn.length() != 10 || isbn.length() != 13)) {
             throw new IllegalArgumentException("Invalid ISBN: ISBN must be 10 or 13 numeric characters long.");
         }
         
@@ -70,4 +70,10 @@ public class Library {
         book.setAvailable(false);
     }
 
+    //Return a book
+    public void returnBook(String isbn) {
+        Book book = books.get(isbn);
+        book.setAvailable(true);
+    }
+    
 }
