@@ -54,7 +54,7 @@ public class App {
         System.out.println("3. Return Book");
         System.out.println("4. View Available Books");
         System.out.println("5. Exit");
-        System.out.print("Please select an option (1-5): \n");
+        System.out.print("Please select an option (1-5): ");
     }
 
     //To get user choice
@@ -80,7 +80,7 @@ public class App {
                 addBookOption();
                 break;
             case 2:
-                // borrowBookOption();
+                borrowBookOption();
                 break;
             case 3:
                 // returnBookOption();
@@ -98,7 +98,7 @@ public class App {
 
     //Add book
     private static void addBookOption() {
-        System.out.println("\n--- Add a New Book ---");
+        System.out.println("\n******* Add a New Book *******");
         try {
             System.out.print("Enter ISBN: ");
             String isbn = scanner.nextLine().trim();
@@ -123,4 +123,15 @@ public class App {
         }
     }
 
+    private static void borrowBookOption() {
+        System.out.println("\n******* Borrow a Book *******");
+        try {
+            System.out.print("Enter ISBN of the book to borrow: ");
+            String isbn = scanner.nextLine().trim();
+            library.borrowBook(isbn);
+            System.out.println("Book borrowed successfully!");
+        } catch (Exception e) {
+            System.err.println("Error borrowing book: " + e.getMessage());
+        }
+    }
 }
