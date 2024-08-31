@@ -4,11 +4,12 @@ public class Book {
     private String isbn;
     private String title;
     private String author;
-    private int publicationYear;
+    private Integer publicationYear;
     private boolean isAvailable;
 
-    public Book(String isbn, String title, String author, int publicationYear) {
-        this.isbn = isbn;
+    //Book constructor
+    public Book(String isbn, String title, String author, Integer publicationYear) {
+        this.isbn = isbn.replaceAll("\\s", "");
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -21,7 +22,11 @@ public class Book {
     }
 
     public void setIsbn(String isbn) {
+        if(isValidISBN(isbn)){
         this.isbn = isbn;
+        }else{
+            throw new IllegalArgumentException("Invalid ISBN: ISBN must be 10 or 13 characters long.");
+        }
     }
 
     public String getTitle() {
@@ -40,11 +45,11 @@ public class Book {
         this.author = author;
     }
 
-    public int getPublicationYear() {
+    public Integer getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(int publicationYear) {
+    public void setPublicationYear(Integer publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -54,8 +59,21 @@ public class Book {
 
     public void setAvailable(boolean available) {
         isAvailable = available;
+    } 
+    public boolean isValidISBN(String isbn) {
+        // Remove spaces
+        isbn = isbn.trim().replaceAll("\\s", "");
+    
+        // Check if ISBN length is either 10 or 13
+        if (isbn.length() != 10 && isbn.length() != 13) {
+            return false;
+        }
+    
+        // Check if ISBN contains only numeric characters
+        return isbn.matches("\\d+");
     }
-
+    
+    
     @Override
     public String toString() {
         return String.format("Book[ISBN=%s | Title=%s | Author=%s | Year=%d]",isbn, title, author, publicationYear);

@@ -1,11 +1,18 @@
 package com.example;
 
 import java.util.Scanner;
+import com.example.Library;
+import com.example.Book;
 
 public class App {
+
+    //libary instance
     private static Library library = new Library();
+
+    //scanner instance
     private static Scanner scanner = new Scanner(System.in);
 
+    //Main method
     public static void main(String[] args) {
         // Pre-populate the library with some books
         initializeLibrary();
@@ -14,18 +21,20 @@ public class App {
         runMenu();
     }
 
+    //initial available books
     private static void initializeLibrary() {
         try {
-            library.addBook(new Book("123456", "3 Laws of TDD", "Robert Martin", 2018));
-            library.addBook(new Book("789012", "Unit Testing", "Robert C. Martin", 2008));
-            library.addBook(new Book("677687", "Design Patterns", "Erich Gamma", 1994));
-            library.addBook(new Book("111111", "Introduction to Algorithms", "Thomas H. Cormen", 1990));
-            library.addBook(new Book("333333", "Modern C++ in Action", "Nicolai Josuttis", 2015));
+            library.addBook(new Book("1234567890", "3 Laws of TDD", "Robert Martin", 2018));
+            library.addBook(new Book("7890121334", "Unit Testing", "Robert C. Martin", 2008));
+            library.addBook(new Book("6776873213323", "Design Patterns", "Erich Gamma", 1994));
+            library.addBook(new Book("1111113213", "Introduction to Algorithms", "Thomas H. Cormen", 1990));
+            library.addBook(new Book("3333337677676", "Modern C++ in Action", "Nicolai Josuttis", 2015));
         } catch (Exception e) {
-            System.err.println("Error initializing library: " + e.getMessage());
+            System.err.println("\nError initializing library: " + e.getMessage());
         }
     }
 
+    //Start menu
     private static void runMenu() {
         while (true) {
             displayMenu();
@@ -37,6 +46,7 @@ public class App {
         }
     }
 
+    //To display menu
     private static void displayMenu() {
         System.out.println("\n******* Library Management System *******");
         System.out.println("1. Add Book");
@@ -44,9 +54,10 @@ public class App {
         System.out.println("3. Return Book");
         System.out.println("4. View Available Books");
         System.out.println("5. Exit");
-        System.out.print("Please select an option (1-5): ");
+        System.out.print("Please select an option (1-5): \n");
     }
 
+    //To get user choice
     private static int getUserChoice() {
         int choice = -1;
         try {
@@ -62,6 +73,7 @@ public class App {
         return choice;
     }
 
+    //To execute choice
     private static void executeChoice(int choice) {
         switch (choice) {
             case 1:
@@ -84,6 +96,7 @@ public class App {
         }
     }
 
+    //Add book
     private static void addBookOption() {
         System.out.println("\n--- Add a New Book ---");
         try {
@@ -94,8 +107,14 @@ public class App {
             System.out.print("Enter Author: ");
             String author = scanner.nextLine().trim();
             System.out.print("Enter Publication Year: ");
-            int year = Integer.parseInt(scanner.nextLine().trim());
-
+            String y=scanner.nextLine().trim();
+            Integer year;
+            if(y.isEmpty()){
+                throw new IllegalArgumentException("Publication year cannot be empty");
+            }else{
+                year= Integer.parseInt(y);
+            }
+            
             Book newBook = new Book(isbn, title, author, year);
             library.addBook(newBook);
             System.out.println("Book added successfully!");
