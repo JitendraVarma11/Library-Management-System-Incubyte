@@ -37,23 +37,37 @@ public class Library {
         books.put(book.getIsbn(), book);
     }
 
-    //Borrow a book
+    // Borrow a book
     public void borrowBook(String isbn) {
+        // If ISBN is null
+        if (isbn == null) {
+            throw new IllegalArgumentException("ISBN cannot be null.");
+        }
+        // If ISBN is null
+        if (isbn.isEmpty()) {
+            throw new IllegalArgumentException("ISBN cannot be empty.");
+        }
+        // check is ISBN valid
+        isbn = isbn.trim().replaceAll("\\s+", "");
+        if (!isbn.matches("\\d+") || (isbn.length() != 10 && isbn.length() != 13)) {
+            throw new IllegalArgumentException("Invalid ISBN: ISBN must be 10 or 13 numeric characters long.");
+        }
+        
         // Check if the book with the given ISBN exists in the library
         Book book = books.get(isbn);
-    
+
         // If the book doesn't exist, throw an exception
         if (book == null) {
             throw new IllegalArgumentException("Book not found.");
         }
-    
+
         // If the book is already borrowed, throw an exception
         if (!book.isAvailable()) {
             throw new IllegalArgumentException("Book is already borrowed.");
         }
-    
+
         // Mark the book as borrowed by setting its availability to false
         book.setAvailable(false);
     }
-    
+
 }

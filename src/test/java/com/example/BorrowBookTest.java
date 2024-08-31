@@ -24,6 +24,11 @@ public class BorrowBookTest {
     
     @Test
     public void testBorrowAlreadyBorrowedBook() {
+        Book book = new Book("1234567999", "Test Book", "Author", 2023);
+
+        library.addBook(book);
+        library.borrowBook("1234567999");
+
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             library.borrowBook("1234567999");
         });
