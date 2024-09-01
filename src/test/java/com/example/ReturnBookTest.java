@@ -17,11 +17,11 @@ public class ReturnBookTest {
         Book book = new Book("1234567999", "Test Book", "Author", 2023);
         library.addBook(book);
 
-        library.borrowBook("1234567890");
+        library.borrowBook("1234567999");
 
-        library.returnBook("1234567890");
+        library.returnBook("1234567999");
 
-        assertTrue("The book should be marked as available.", book.isAvailable());
+        assertTrue(book.isAvailable());
     }
 
     @Test

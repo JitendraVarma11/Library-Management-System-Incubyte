@@ -43,13 +43,13 @@ public class Library {
         if (isbn == null) {
             throw new IllegalArgumentException("ISBN cannot be null.");
         }
-        // If ISBN is null
+        // If ISBN is empty
         if (isbn.isEmpty()) {
             throw new IllegalArgumentException("ISBN cannot be empty.");
         }
         // check is ISBN valid
         isbn = isbn.trim().replaceAll("\\s+", "");
-        if (!isbn.matches("\\d+") || (isbn.length() != 10 || isbn.length() != 13)) {
+        if (!isbn.matches("\\d+") || (isbn.length() != 10 && isbn.length() != 13)) {
             throw new IllegalArgumentException("Invalid ISBN: ISBN must be 10 or 13 numeric characters long.");
         }
         
@@ -72,8 +72,34 @@ public class Library {
 
     //Return a book
     public void returnBook(String isbn) {
+        // If ISBN is null
+        if (isbn == null) {
+            throw new IllegalArgumentException("ISBN cannot be null.");
+        }
+        // If ISBN is empty
+        if (isbn.isEmpty()) {
+            throw new IllegalArgumentException("ISBN cannot be empty.");
+        }
+        // check is ISBN valid
+        isbn = isbn.trim().replaceAll("\\s+", "");
+        if (!isbn.matches("\\d+") || (isbn.length() != 10 && isbn.length() != 13)) {
+            throw new IllegalArgumentException("Invalid ISBN: ISBN must be 10 or 13 numeric characters long.");
+        }
+        
+        // Check if the book with the given ISBN exists in the library
         Book book = books.get(isbn);
+
+        // If the book doesn't exist, throw an exception
+        if (book == null) {
+            throw new IllegalArgumentException("Book not found.");
+        }
+
+        // If the book is already returned, throw an exception
+        if (book.isAvailable()) {
+            throw new IllegalArgumentException("Book is already available.");
+        }
+
         book.setAvailable(true);
     }
-    
+
 }
