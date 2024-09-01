@@ -23,11 +23,11 @@
 **Description**: This section includes results for the "Borrow Book" functionality, testing various scenarios of borrowing books.
 
 <div align="center">
-  <img src="./assets/BorrowBookTest.jpg.png" alt="Borrow Book Test" width="60%" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+  <img src="./assets/BorrowBookTest.jpg" alt="Borrow Book Test" width="60%" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
 </div>
 
 <div align="center">
-  <img src="./assets/BorrowBookTest0.jpg.png" alt="Borrow Book Test 0" width="60%" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+  <img src="./assets/BorrowBookTest0.jpg" alt="Borrow Book Test 0" width="60%" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
 </div>
 
 ---
