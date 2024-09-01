@@ -102,4 +102,14 @@ public class Library {
         book.setAvailable(true);
     }
 
+    //View Available Book
+    public Map<String,Book> getAvailableBooks(){
+        Map<String, Book> availableBooks = new HashMap<>();
+        for (Book book : books.values()) {
+            if (book.isAvailable()) {
+                availableBooks.put(book.getIsbn(), book);
+            }
+        }
+        return availableBooks;
+    }
 }

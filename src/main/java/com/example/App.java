@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 public class App {
 
-    //libary instance
+    // libary instance
     private static Library library = new Library();
 
-    //scanner instance
+    // scanner instance
     private static Scanner scanner = new Scanner(System.in);
 
-    //Main method
+    // Main method
     public static void main(String[] args) {
         // Pre-populate the library with some books
         initializeLibrary();
@@ -19,7 +19,7 @@ public class App {
         runMenu();
     }
 
-    //initial available books
+    // initial available books
     private static void initializeLibrary() {
         try {
             library.addBook(new Book("1234567890", "3 Laws of TDD", "Robert Martin", 2018));
@@ -32,7 +32,7 @@ public class App {
         }
     }
 
-    //Start menu
+    // Start menu
     private static void runMenu() {
         while (true) {
             displayMenu();
@@ -44,7 +44,7 @@ public class App {
         }
     }
 
-    //To display menu
+    // To display menu
     private static void displayMenu() {
         System.out.println("\n******* Library Management System *******");
         System.out.println("1. Add Book");
@@ -55,7 +55,7 @@ public class App {
         System.out.print("Please select an option (1-5): ");
     }
 
-    //To get user choice
+    // To get user choice
     private static int getUserChoice() {
         int choice = -1;
         try {
@@ -71,7 +71,7 @@ public class App {
         return choice;
     }
 
-    //To execute choice
+    // To execute choice
     private static void executeChoice(int choice) {
         switch (choice) {
             case 1:
@@ -84,7 +84,7 @@ public class App {
                 returnBookOption();
                 break;
             case 4:
-                // viewAvailableBooksOption();
+                viewAvailableBooksOption();
                 break;
             case 5:
                 System.out.println("Exiting the system. Goodbye!");
@@ -94,7 +94,7 @@ public class App {
         }
     }
 
-    //Add a book
+    // Add a book
     private static void addBookOption() {
         System.out.println("\n******* Add a New Book *******");
         try {
@@ -105,14 +105,14 @@ public class App {
             System.out.print("Enter Author: ");
             String author = scanner.nextLine().trim();
             System.out.print("Enter Publication Year: ");
-            String y=scanner.nextLine().trim();
+            String y = scanner.nextLine().trim();
             Integer year;
-            if(y.isEmpty()){
+            if (y.isEmpty()) {
                 throw new IllegalArgumentException("Publication year cannot be empty");
-            }else{
-                year= Integer.parseInt(y);
+            } else {
+                year = Integer.parseInt(y);
             }
-            
+
             Book newBook = new Book(isbn, title, author, year);
             library.addBook(newBook);
             System.out.println("Book added successfully!");
@@ -121,7 +121,7 @@ public class App {
         }
     }
 
-    //Borrow a book
+    // Borrow a book
     private static void borrowBookOption() {
         System.out.println("\n******* Borrow a Book *******");
         try {
@@ -134,7 +134,7 @@ public class App {
         }
     }
 
-    //Return a book
+    // Return a book
     private static void returnBookOption() {
         System.out.println("\n--- Return a Book ---");
         try {
@@ -146,4 +146,17 @@ public class App {
             System.err.println("Error returning book: " + e.getMessage());
         }
     }
+
+    // View Available Book
+    private static void viewAvailableBooksOption() {
+        System.out.println("\n******** Available Books ********");
+        if (library.getAvailableBooks().isEmpty()) {
+            System.out.println("No books are currently available.");
+        } else {
+            library.getAvailableBooks().forEach((isbn, book) -> {
+                System.out.println(book);
+            });
+        }
+    }
+
 }
