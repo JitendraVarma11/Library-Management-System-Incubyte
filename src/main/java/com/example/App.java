@@ -115,7 +115,8 @@ public class App {
 
             Book newBook = new Book(isbn, title, author, year);
             library.addBook(newBook);
-            System.out.println("Book added successfully!");
+            System.out.println("Book added successfully!\n");
+            viewAvailableBooksOption();
         } catch (Exception e) {
             System.err.println("Error adding book: " + e.getMessage());
         }
@@ -128,7 +129,8 @@ public class App {
             System.out.print("Enter ISBN of the book to borrow: ");
             String isbn = scanner.nextLine().trim();
             library.borrowBook(isbn);
-            System.out.println("Book borrowed successfully!");
+            System.out.println("Book borrowed successfully!\n");
+            viewAvailableBooksOption();
         } catch (Exception e) {
             System.err.println("Error borrowing book: " + e.getMessage());
         }
@@ -141,7 +143,8 @@ public class App {
             System.out.print("Enter ISBN of the book to return: ");
             String isbn = scanner.nextLine().trim();
             library.returnBook(isbn);
-            System.out.println("Book returned successfully!");
+            System.out.println("Book returned successfully!\n");
+            viewAvailableBooksOption();
         } catch (Exception e) {
             System.err.println("Error returning book: " + e.getMessage());
         }
